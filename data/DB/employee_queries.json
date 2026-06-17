@@ -1,0 +1,6 @@
+{
+  "get_employee_by_id": "SELECT * FROM employees WHERE employee_id = %s",
+  "delete_employee_by_id": "DELETE FROM employees WHERE employee_id = %s"
+
+
+}
