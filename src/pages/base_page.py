@@ -19,6 +19,9 @@ class BasePage:
         self.page.goto(url)
         self.wait_for_page_load()
 
+    def wait_for_page_load(self):
+        self.page.wait_for_load_state("domcontentloaded")
+
     def locator(self, selector: str):
         return self.page.locator(selector)
 
@@ -51,20 +54,43 @@ class BasePage:
     def get_text(self, selector:str) -> str:
         return self.page.locator(selector).inner_text()
 
-    def is_visible(self, selector, timeout: int = 5000) -> bool:
-        try:
-            selector.wait_for(state="visible", timeout=timeout)
-            return True
-        except Exception:
-            return False
+    def expect_visible(self, selector:str):
+        expect(self.page.locator(selector)).to_be_visible()
 
-    def wait_for_page_load(self):
-        self.page.wait_for_load_state("domcontentloaded")
+    def expect_hidden(self, selector:str):
+        expect(self.page.locator(selector)).to_be_hidden()
 
-    def wait_for_network_idle(self):
-        self.page.wait_for_load_state("networkidle")
+    def expect_text_visible(self, text: str):
+        expect(self.page.get_by_text(text)).to_be_visible()
+
+    def select_dropdown_options(self, dropdown_selector:str, option_selector:str):
+        self.safe_click(dropdown_selector)
+        self.safe_click(option_selector)
+
+    def press_key(self, key:str):
+        self.page.keyboard.press(key)
+
+    def verify_url_contains(self, expected_url_part:str):
+        assert expected_url_part in self.page.url, (
+            f"Expected URL to contain '{expected_url_part}', actual URL: {self.page.url}"
+        )
+
+    def verify_title_contains(self, expected_title: str):
+        actual_title = self.page.title()
+        assert expected_title in actual_title, (
+            f"Expected title to contain '{expected_title}', actual title: {actual_title}"
+        )
 
 
-    def verify_page_loaded(self, url_part :str, page_title: str):
-        expect(self.page).to_have_url(re.compile(f".*{url_part}.*"))
-        expect(self.page.locator("h6").filter(has_text=page_title)).to_be_visible(timeout=self.timeout)
+    def verify_no_server_error_visible(self):
+        server_errors = [
+            "500",
+            "Internal Server Error",
+            "Application Error",
+            "Server Error"
+        ]
+        body_text = self.page.locator("body").inner_text()
+
+        for error in server_errors:
+            assert error not in body_text,f"Unexpected server error visible: {error}"
+
