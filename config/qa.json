@@ -1,15 +1,33 @@
 {
-  "base_url" : "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
-  "api_base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2",
-  "timeout": 3000,
-  "headless": true,
-  "db_enabled": false,
+  "qa" :{
+    "base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+    "username_env": "QA_USERNAME",
+    "password_env": "QA_PASSWORD"
+},
+  "api": {
+    "api_base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2",
+    "timeout": 3000,
+    "headless": true,
+    "db_enabled": false
+  },
   "db": {
     "host": "localhost",
     "port": 3306,
     "username": "root",
     "password": "password",
     "database": "orangehrm"
+  },
+  "timeouts": {
+    "default_timeout": 10000,
+    "navigation_timeout": 30000,
+    "element_timeout": 10000
+
+  },
+
+  "reports": {
+    "screenshot_path": "reports/screenshots",
+    "video_path": "reports/videos",
+    "allure_results": "reports/allure-results"
   }
 
 }

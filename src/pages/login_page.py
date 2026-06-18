@@ -10,13 +10,6 @@ class LoginPage(BasePage):
         super().__init__(page)
 
 
-        self.username_input = page.locator("input[name='username']")
-        self.password_input = page.locator("input[name='password']")
-        self.login_button = page.locator("button[type='submit']")
-
-        # --pop invalid alert---
-        self.invalid_credentials_alert = page.locator(".oxd-alert-content-text")
-        self.required_errors = page.locator(".oxd-input-field-error-message")
 
 
     def open(self):
