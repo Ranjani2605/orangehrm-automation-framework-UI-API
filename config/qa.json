@@ -1,9 +1,9 @@
 {
   "qa" :{
     "base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
-    "username_env": "QA_USERNAME",
-    "password_env": "QA_PASSWORD"
-},
+    "dashboard_url" : "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
+    "api_base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2"
+  },
   "api": {
     "api_base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2",
     "timeout": 3000,

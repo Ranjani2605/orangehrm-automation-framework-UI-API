@@ -1,9 +1,44 @@
-.venv/
-__pycache__/
+# python
+_pycache_/
 *.pyc
+*.pyo
+*.pyd
 .pytest_cache/
-playwright-report/
+
+# Virtual environment
+.venv/
+.venv
+env/
+
+# Environment variabled
+.env
+.env.*
+
+#Keep example env file
+!.env.example
+
+# Reports
+allure-results/
+allure-report/
+html-report/
+pytest-report.html
+
+# Test artifacts
+artifacts/screenshots/*
+artifacts/traces/*
+artifacts/videos/*
 test-results/
-.idea/
+playwrigt-report/
+
+# IDE
+.idea
 .vscode/
-.env.example
+
+# OS
+.DS_ store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+

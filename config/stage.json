@@ -1,5 +1,6 @@
 {
   "base_url" : "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+  "dashboard_url" : "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
   "api_base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2",
   "timeout": 3000,
   "headless": true,

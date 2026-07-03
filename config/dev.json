@@ -1,7 +1,10 @@
 {
   "base_url" : "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+  "dashboard_url" : "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
   "api_base_url": "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2",
-  "timeout": 3000,
+  "browser": "chromium",
+  "default_timeout": 10000,
+  "navigation_timeout": 30000,
   "headless": true,
   "db_enabled": false,
   "db": {
