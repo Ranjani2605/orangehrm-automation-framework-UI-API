@@ -1,7 +1,20 @@
 # OrangeHRM Automation Framework
 
 Enterprise-style automation framework for OrangeHRM using Python, Playwright, Pytest, Page object Model, API testing, DB validation, Allure reporting and GitHub Actions.
+## Purpose
 
+The purpose of this project is to demonstrate a company-style QA automation framework that covers:
+
+-UI automation
+-API automation
+-Optional database validation
+-smoke and regression test execution
+-Reusable Page Object Model
+-Environment-based configuration
+-Test data management
+-Screenshot, video and trace capture on failure
+-Allure reporting
+-GitHub Actions CI/CD execution
 ### Tech Stack
 
 -Python
@@ -16,7 +29,7 @@ Enterprise-style automation framework for OrangeHRM using Python, Playwright, Py
 -Bandit
 -pip-audit
 
-## Project Structure
+## Folder Structure
 ```text
 config/                  Environment config
 data/                    Test data

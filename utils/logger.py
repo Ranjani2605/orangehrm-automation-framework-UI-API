@@ -1,14 +1,16 @@
 import logging
 
-from src.core.constants import ProjectPaths
+
+from src.core.constants import LOGS_DIR
 
 
 def get_logger(name: str) -> logging.Logger:
-    ProjectPaths.LOGS_DIR.mkdir(parents=True, exist_ok=True)
+    LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
 
+    # Avoid duplicate logs when logger is called multiple times
     if logger.handlers:
         return logger
 
@@ -16,10 +18,11 @@ def get_logger(name: str) -> logging.Logger:
         "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     )
 
+
     file_handler = logging.FileHandler(
-        ProjectPaths.LOGS_DIR / "automation.log",
+        LOGS_DIR / "automation.log",
         mode="a",
-        encoding="urf-8"
+        encoding="utf-8"
     )
 
     file_handler.setFormatter(formatter)

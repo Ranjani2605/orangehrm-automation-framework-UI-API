@@ -1,0 +1,46 @@
+name: Regression Tests
+
+on:
+  workflow_dispatch:
+    schedule:
+      -cron: "0 21 * * 1-5"
+
+jobs:
+  regeression-tests:
+    runs-on: ubuntu-latest
+
+    env:
+      ENV: dev
+      ORANGEHRM_USERNAME: ${{ secrest.ORANGEHRM_USERNAME }}
+      ORANGEHRM_PASSWORD: ${{ secrest.ORANGEHRM_PASSWORD }}
+
+
+    Steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Playwright browsers
+        run: |
+          playwright install --with-deps
+
+      - name: Run regression tests
+        run: |
+          pytest -m regression --reruns 1 --reruns-delay 2
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-artifacts-regression
+          path: |
+            artifacts/screenshots
+            artifacts/traces
+            artifacts/videos
+            logs
+          
+       

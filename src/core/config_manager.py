@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-from src.core.constants import *
+from .constants import CONFIG_DIR
 
 class ConfigManager:
 
@@ -33,6 +33,44 @@ class ConfigManager:
 
     def get_api_base_url(self) -> str:
         return self.config["api_base_url"]
+
+    def get_username(self) -> str:
+        return os.getenv("ORANGEHRM_USERNAME")
+
+    def get_password(self) -> str:
+        return os.getenv("ORANGEHRM_PASSWORD")
+
+    def get_browser(self) -> str:
+        return self.config.get("browser", "chromium")
+
+    def is_headless(self) -> bool:
+        return self.config.get("headless", True)
+
+    def get_default_timeout(self) -> int:
+        return self.config.get("default_timeout", 10000)
+
+    def get_navigation_timeout(self) -> int:
+        return self.config.get("navigation_timeout", 30000)
+
+    def get_viewport(self) -> dict:
+        return self.config.get("viewport", {"width": 1366, "height": 768})
+
+    def is_db_enabled(self) -> bool:
+        return self.config.get("db_enabled", False)
+
+    def get_db_config(self) -> dict:
+        return{
+            "host": os.getenv("DB_HOST"),
+            "port": int(os.getenv("DB_PORT", 3306)),
+            "user": os.getenv("DB_USERNAME"),
+            "password": os.getenv("DB_PASSWORD"),
+            "database": os.getenv("DB_NAME"),
+
+
+
+        }
+
+
 
 
 

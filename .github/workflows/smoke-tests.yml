@@ -1,0 +1,51 @@
+name: Smoke Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+  jobs:
+    smoke-tests:
+      runs-on: ubuntu-latest
+
+
+    env:
+      ENV: dev
+      ORANGEHRM_USERNAME: ${{ secrest.ORANGEHRM_USERNAME }}
+      ORANGEHRM_PASSWORD: ${{ secrest.ORANGEHRM_PASSWORD }}
+
+
+    steps:
+      - name: checkout repository
+        uses: actions/setup-python@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Playwright browsers
+        run: |
+          pytest -m smoke
+
+      - name: Upload Allure results
+        if: always()
+        uses: action/upload-artifact@v4
+        with:
+          name: allure-results-smole
+          path: allure-results
+
+
+      - name: Upload failure artifacts
+        if: always()
+        uses: actions/upload-artifacts@v4
+        with:
+          name: test-artifacts-smoke
+          path: |
+            artifacts/screenshots
+            artifacts/traces
+            artifacts/videos
+            logs

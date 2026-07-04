@@ -1,11 +1,13 @@
-
-
+from src.core.config_manager import ConfigManager
 from src.pages.base_page import BasePage
 from src.locators.login_loacators import LoginLocators
 
 
 
 class LoginPage(BasePage):
+
+    def open_login_page(self, url: str):
+        self.goto(url)
 
     def enter_username(self, username:str):
         self.clear_and_fill(LoginLocators.username_input, username)
