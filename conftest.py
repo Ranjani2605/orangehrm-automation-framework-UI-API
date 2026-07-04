@@ -18,6 +18,11 @@ def config():
 
 def create_artifact_folders():
     SCREENSHOTS_DIR.mkdir(parents=True, exist_ok=True)
+    VIDEOS_DIR.mkdir(parents=True, exist_ok=True)
+
+@pytest.fixture(scope="session", autouse=True)
+def setup_folders():
+    create_artifact_folders()
 
 @pytest.fixture(scope="session", autouse=True)
 def playwright_instance():
@@ -54,6 +59,7 @@ def login_page(page):
     return LoginPage(page)
 
 
+@pytest.fixture(scope="function")
 def logged_in_page(page, config):
     login_page = LoginPage(page)
 

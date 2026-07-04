@@ -1,4 +1,4 @@
-import configparser
+
 import json
 import os
 from pathlib import Path
@@ -22,9 +22,6 @@ class ConfigManager:
         with open(config_file, "r", encoding="utf-8") as file:
             return json.load(file)
 
-    def get(self, key:str, default=None):
-        return self.config.get(key, default)
-
     def get_base_url(self) -> str:
         return self.config["base_url"]
 
@@ -35,10 +32,16 @@ class ConfigManager:
         return self.config["api_base_url"]
 
     def get_username(self) -> str:
-        return os.getenv("ORANGEHRM_USERNAME")
+        username = os.getenv("ORANGEHRM_USERNAME")
+        if not username:
+            raise ValueError("ORANGEHRM_USERNAME is missing in .env file")
+        return username
 
     def get_password(self) -> str:
-        return os.getenv("ORANGEHRM_PASSWORD")
+        password = os.getenv("ORANGEHRM_PASSWORD")
+        if not password:
+            raise ValueError("ORANGEHRM_PASSWORD is missing in .env file")
+        return password
 
     def get_browser(self) -> str:
         return self.config.get("browser", "chromium")
