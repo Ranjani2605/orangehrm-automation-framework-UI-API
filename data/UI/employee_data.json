@@ -1,0 +1,19 @@
+{
+  "employee_rules": {
+    "minimum_age": 18,
+    "validate_employee_id_exact_digits": false,
+    "employee_id_digits": 4
+  },
+
+  "personal_details": {
+    "license_expiry_years_from_today": 4,
+    "nationality": "Indian",
+    "marital_status": "Single",
+    "gender": "Male",
+    "blood_type": "o+"
+  },
+
+  "custom_fields" : {
+    "test_field_perfix": "Automation Test"
+  }
+}
