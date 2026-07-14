@@ -44,13 +44,23 @@ class PimPage(BasePage):
 
 
     def enter_employee_name(self, first_name: str, middle_name: str = "", last_name: str = "" ):
-        self.clear_and_fill(PimLocators.first_name_input, first_name)
+        first_name_field = self.locator(PimLocators.first_name_input)
+        middle_name_field = self.locator(PimLocators.middle_name_input)
+        last_name_field = self.locator(PimLocators.last_name_input)
+
+        first_name_field.wait_for(state="visible")
+        first_name_field.click()
+        first_name_field.fill(first_name)
 
         if middle_name:
-            self.clear_and_fill(PimLocators.middle_name_input, middle_name)
+            middle_name_field.wait_for(state="visible")
+            middle_name_field.click()
+            middle_name_field.fill(middle_name)
 
         if last_name:
-            self.clear_and_fill(PimLocators.last_name_input, last_name)
+            last_name_field.wait_for(state="visible")
+            last_name_field.click()
+            last_name_field.fill(last_name)
 
     def get_employee_id(self) -> str:
         return self.get_input_value(PimLocators.employee_id_input)

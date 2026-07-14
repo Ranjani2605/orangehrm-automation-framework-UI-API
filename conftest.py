@@ -65,6 +65,12 @@ def logged_in_page(page, config):
 
     login_page.open_login_page(config.get_base_url())
     login_page.login(config.get_username(), config.get_password())
+
+    page.wait_for_page_to_load("networkidle")
+
+    assert "/dashboard/index" in page.url, (
+        f"Login failed. Expected dashboard page, but actual URL was: {page.url}"
+    )
     return page
 
 
